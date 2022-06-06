@@ -1,0 +1,14 @@
+server:
+  port : 8081
+management:
+  endpoints:
+    web:
+      exposure:
+        include: prometheus
+      base-path: /
+      path-mapping:
+        prometheus: actuator/prometheus
+  metrics:
+    export:
+      prometheus:
+        enabled: true

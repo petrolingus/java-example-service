@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: java-example-service
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: java-example-service
+  template:
+    metadata:
+      labels:
+        app: java-example-service
+      annotations:
+        prometheus.io/scrape: 'true'
+        prometheus.io/path: '/actuator/prometheus'
+        prometheus.io/port: '8080'
+    spec:
+      containers:
+        - name: java-example-service
+          image: petrolingus/java-example-service:latest
+          ports:
+            - containerPort: 8080
